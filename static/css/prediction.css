@@ -1,0 +1,317 @@
+body {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    color: #26272d;
+    height: 100vh;
+    scroll-behavior:smooth;
+}
+html {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Project Header */
+.project-header {
+    background: linear-gradient(to right, #43cea2, #185a9d);
+    padding: 30px 15px 30px;
+    color: #ffffff;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+.project-title {
+    font-size: 30px;
+    font-weight: 700;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    animation: slideDown 1s ease-in-out;
+    letter-spacing: 1px;
+}
+.project-subtitle {
+    font-size: 18px;
+    font-weight: 400;
+    margin-top: 10px;
+    color: #e0f7fa;
+    animation: fadeInUp 1.2s ease-in-out;
+}
+.project-title:hover {
+    color: #000000;
+    text-shadow: 0 0 12px rgba(111, 199, 84, 0.6);
+    cursor: default;
+}
+
+/* Main Content */
+.site-main {
+    padding: 2px 0 0;
+}
+.site-section {
+    padding: 40px 0 10px;
+}
+
+/* Two-Column Layout */
+.content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 400px;
+}
+.form-wrapper {
+    flex: 1;
+    max-width: 400px;
+}
+.result-wrapper {
+    flex: 1;
+    max-width: 500px;
+    text-align: center;
+}
+
+/* Form Fields */
+.form-container {
+    max-width: 900px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Montserrat', sans-serif;
+
+}
+.form-wrapper {
+    max-width: 45%; 
+    justify-content: center;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    margin: 10px auto;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+
+}
+.form-control:hover {
+    border-color: #6fc754;
+    box-shadow: 0 0 8px rgba(111, 199, 84, 0.6);
+    transform: scale(1.02);
+    transition: all 0.3s ease-in-out;
+}
+.form-container label {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+    color: #26272d;
+    font-family: 'Montserrat', sans-serif;
+
+}
+.btn-predict {
+    display: block;
+    width: 100%; 
+    margin: 20px auto 0;
+    padding: 10px 0;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    background: linear-gradient(to right, #43cea2, #185a9d);
+    box-sizing: border-box;
+}
+.btn-predict:hover {
+    color: #fff;
+    background: #000000;
+    box-shadow: 0 0 10px rgba(111, 199, 84, 0.6);
+}
+.btn-predict:active {
+    transform: scale(0.98);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Result, Precaution, and Gauge */
+.result-text {
+    font-size: 20px;
+    margin: 0 0 10px;
+    margin-top: 30px;
+}
+.precaution-text {
+    font-size: 18px;
+    font-weight: normal;
+    color: #26272d;
+    margin: 0 0 20px;
+}
+.result-text span:hover,.precaution-text span:hover {
+    color: #6fc754;
+    transform: scale(1.05);
+}
+
+#gauge-meter {
+    width: 250px;
+    height: 200px;
+    margin: 0 auto;
+}
+.form-wrapper h2,.result-wrapper h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 26px;
+    font-weight: 600;
+    color: #2c3e50;
+    border-bottom: 2px solid #00bcd4;
+    padding-bottom: 8px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+.result-box {
+    max-width: 500px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.result-wrapper h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 26px;
+    font-weight: 600;
+    color: #2c3e50;
+    border-bottom: 2px solid #00bcd4;
+    padding-bottom: 8px;
+    margin-bottom: 23px;
+    text-align: center;
+}
+.result-text,.precaution-text {
+    font-size: 16px;
+    margin-bottom: 15px;
+    padding: 10px 15px;
+    background: #fff;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    color: #333;
+}
+.form-container:hover, .result-box:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
+}
+
+.btn-history {
+    display: block;
+    width: 100%;
+    background: linear-gradient(to right, #43cea2, #185a9d);
+    color: white;
+    text-align: center;
+    padding: 9px;
+    font-size: 18px;
+    margin-top: 10px;
+    text-decoration: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+.btn-history:hover {
+    background: #000000;
+    box-shadow: 0 0 10px rgba(111, 199, 84, 0.6);
+    color: white;
+    text-decoration: none;
+}
+.btn-history:active {
+    transform: scale(0.98);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Footer */
+.site-footer {
+    background-color: black;
+    color: #ffffff;
+    padding: 20px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+.site-footer p {
+    margin: 0;
+    font-size: 14px;
+    color: #ffffff;
+}
+.site-footer p:hover {
+    color: #6fc754;
+    transform: scale(1.05);
+}
+.site-footer a {
+    color: #ffffff;
+    text-decoration: none;
+}
+.site-footer a:hover {
+    color: #6fc754;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .content-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+    .form-wrapper,.result-wrapper {
+        max-width: 90%;
+        width: 100%;
+        text-align: center;
+    }
+    .form-container {
+        width: 100%; 
+    }
+    .result-text {
+        text-align: left;
+    }
+    .precaution-text {
+        text-align: left;
+    }
+    .project-title {
+        font-size: 26px;
+    }
+
+    .project-subtitle {
+        font-size: 15px;
+    }
+}
+@media (max-width: 480px) {
+    .hero {
+        padding: 60px 10px 40px;
+        margin-top: 0px;
+    }
+    .hero-text h1 {
+        font-size: 24px;
+    }
+}
+@media (max-width: 500px) {
+    .form-container {
+        max-width: 500%;
+    }
+    .form-control {
+        width: 90%;
+    }
+    .form-container label {
+        margin-left: 5%;
+    }
+}
+
+@media (max-width: 768px) {
+    .btn-predict,
+    .btn-history {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media (max-width: 500px) {
+    .btn-predict,
+    .btn-history {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
