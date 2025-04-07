@@ -3,7 +3,7 @@ import os
 import time
 import sys
 import socket
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect, url_for, flash
 import weka.core.jvm as jvm
 from weka.classifiers import Classifier, Evaluation
 from weka.core.converters import Loader
@@ -54,7 +54,8 @@ model_names = {
     "logit_boost": "Logit Boost",
     "rep_tree": "Rep Tree",
     "bagging": "Bagging",
-    "lwl": "Lwl"
+    "lwl": "Lwl",
+    #"one_r": "One R"
 }
 
 # Loading WEKA models
@@ -128,7 +129,7 @@ def predict():
             1: ("Medium Low", "Relax a bit—try meditation, drink more water, and avoid too much tea or coffee."),
             2: ("Medium", "Take small breaks, go for a walk, and reduce screen time."),
             3: ("Medium High", "Follow a proper sleep routine, try to stay calm, and talk to someone if needed."),
-            4: ("High", "This is serious. Get help, take care of yourself, and don’t overwork."),
+            4: ("High", "This is serious. Get help, take care of yourself, and don't overwork."),
         }
 
         stress_label, precaution = stress_levels.get(result, ("Unknown", "No precaution available."))
@@ -157,6 +158,19 @@ def history():
                         "stress_label": stress_label
                     })
     return render_template('history.html', records=records, metrics=metrics)
+
+# route to clear history
+@app.route('/clear_history')
+def clear_history():
+    try:
+        with open(history_file, mode='w', newline='') as file:
+            pass 
+          
+    except Exception as e:
+        print(f"Error clearing history: {e}")
+    
+    return redirect(url_for('history'))
+    
 
 # Running App
 if __name__ == "__main__":   # Start the Flask app

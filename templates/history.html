@@ -15,12 +15,16 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700" rel="stylesheet">
 </head>
 <body>
-
     <!-- Main Title -->
     <h2 class="section-heading">Prediction History</h2>
 
     <div class="container mt-4 history-container">
         {% if records %}
+            <div class="button-wrapper">
+                <div class="clear-button-container">
+                    <a href="{{ url_for('clear_history') }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to clear all history records?');">Clear History</a>
+                </div>
+            </div>
             <table class="table table-bordered table-striped">
                 <thead class="thead-dark">
                     <tr>
@@ -65,31 +69,29 @@
 
     <!-- Performance Comparison Table -->
     <h3 class="section-heading">Model Comparison Table</h3>
-    <div class="container mb-5">
-        <div class="table-responsive">
-            <table class="table table-bordered table-hover text-center">
-                <thead class="thead-light">
-                    <tr>
-                        <th>Model</th>
-                        <th>Accuracy</th>
-                        <th>Precision</th>
-                        <th>Recall</th>
-                        <th>F-Measure</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for model, data in metrics.items() %}
-                    <tr>
-                        <td>{{ model }}</td>
-                        <td>{{ data.accuracy }}</td>
-                        <td>{{ data.precision }}</td>
-                        <td>{{ data.recall }}</td>
-                        <td>{{ data.f_measure }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+    <div class="container mt-4 history-container">
+        <table class="table table-bordered table-hover text-center">
+            <thead class="thead-light">
+                <tr>
+                    <th>Model</th>
+                    <th>Accuracy</th>
+                    <th>Precision</th>
+                    <th>Recall</th>
+                    <th>F-Measure</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for model, data in metrics.items() %}
+                <tr>
+                    <td>{{ model }}</td>
+                    <td>{{ data.accuracy }}</td>
+                    <td>{{ data.precision }}</td>
+                    <td>{{ data.recall }}</td>
+                    <td>{{ data.f_measure }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 
     <!-- Accuracy Chart -->
@@ -97,8 +99,7 @@
     <div class="container mb-5 text-center">
         <img src="{{ url_for('static', filename='images/algorithm_accuracy.jpg') }}"
              alt="Accuracy Comparison Graph"
-             class="img-fluid rounded border shadow"
-             style="max-width: 90%;">
+             class="img-fluid rounded border shadow">
     </div>
 
     <!-- RMSE & MAE Graph -->
@@ -106,14 +107,19 @@
     <div class="container mb-5 text-center">
         <img src="{{ url_for('static', filename='images/rmse_mae.jpg') }}"
              alt="RMSE and MAE Comparison"
-             class="img-fluid rounded border shadow"
-             style="max-width: 90%;">
+             class="img-fluid rounded border shadow">
     </div>
 
-    <!-- Back Button  to prediction page-->
+    <!-- Back Button to prediction page -->
     <div class="text-center mb-5">
         <a href="{{ url_for('home') }}" class="btn btn-primary">Back to Prediction</a>
     </div>
 
+   <!-- Footer -->
+<footer class="text-center py-3 bg-light">
+    <p>Human Stress Detection Based on Sleeping Habits Using Machine Learning Algorithms</p>
+    <p>&copy; 2025</p>
+    <p>Group Members: B. Ankitha, K. Karthik Reddy, M. Anitha, M. S. Hephzibah</p>
+</footer>
 </body>
 </html>

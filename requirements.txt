@@ -1,0 +1,4 @@
+Flask
+javabridge
+python-weka-wrapper3
+numpy==1.23
