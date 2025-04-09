@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic Page Needs -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Human Stress Detection - History</title>
+
+    <!-- Mobile Specific Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Fonts & Stylesheets -->
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/css/history.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700" rel="stylesheet">
+</head>
+<body>
+    <!-- Main Title -->
+    <h2 class="section-heading">Prediction History</h2>
+
+    <div class="container mt-4 history-container">
+        {% if records %}
+            <div class="button-wrapper">
+                <div class="clear-button-container">
+                    <a href="{{ url_for('clear_history') }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to clear all history records?');">Clear History</a>
+                </div>
+            </div>
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Timestamp</th>
+                        <th>Model</th>
+                        <th>Input Values</th>
+                        <th>Stress Level</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for record in records %}
+                    <tr>
+                        <td>{{ record.timestamp }}</td>
+                        <td>{{ record.model }}</td>
+                        <td>{{ record.input_values }}</td>
+                        <td>{{ record.stress_label }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="no-records text-center">No prediction history available.</p>
+        {% endif %}
+    </div>
+
+    <!-- Model Evaluation -->
+    <h2 class="section-heading">Model Performance Evaluation</h2>
+
+    <!-- Confusion Matrices -->
+    <div class="container mb-5 confusion-matrix-container">
+        <div class="row">
+            {% for model in ['bagging', 'hoeffding tree', 'logit boost', 'lwl', 'random committee', 'rep tree'] %}
+            <div class="col-md-4 text-center mb-4">
+                <h5>{{ model.replace('_', ' ').title() }}</h5>
+                <img src="{{ url_for('static', filename='images/' + model + '.jpg') }}"
+                     alt="{{ model }} Confusion Matrix"
+                     class="img-fluid rounded border">
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Performance Comparison Table -->
+    <h3 class="section-heading">Model Comparison Table</h3>
+    <div class="container mt-4 history-container">
+        <table class="table table-bordered table-hover text-center">
+            <thead class="thead-light">
+                <tr>
+                    <th>Model</th>
+                    <th>Accuracy</th>
+                    <th>Precision</th>
+                    <th>Recall</th>
+                    <th>F-Measure</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for model, data in metrics.items() %}
+                <tr>
+                    <td>{{ model }}</td>
+                    <td>{{ data.accuracy }}</td>
+                    <td>{{ data.precision }}</td>
+                    <td>{{ data.recall }}</td>
+                    <td>{{ data.f_measure }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Accuracy Chart -->
+    <h3 class="section-heading text-center">Model Accuracy Comparison</h3>
+    <div class="container mb-5 text-center">
+        <img src="{{ url_for('static', filename='images/algorithm_accuracy.jpg') }}"
+             alt="Accuracy Comparison Graph"
+             class="img-fluid rounded border shadow">
+    </div>
+
+    <!-- RMSE & MAE Graph -->
+    <h3 class="section-heading text-center">RMSE & MAE Error Values</h3>
+    <div class="container mb-5 text-center">
+        <img src="{{ url_for('static', filename='images/rmse_mae.jpg') }}"
+             alt="RMSE and MAE Comparison"
+             class="img-fluid rounded border shadow">
+    </div>
+
+    <!-- Back Button to prediction page -->
+    <div class="text-center mb-5">
+        <a href="{{ url_for('home') }}" class="btn btn-primary">Back to Prediction</a>
+    </div>
+
+   <!-- Footer -->
+<footer class="text-center py-3 bg-light">
+    <p>Human Stress Detection Based on Sleeping Habits Using Machine Learning Algorithms</p>
+    <p>&copy; 2025</p>
+    <p>Group Members: B. Ankitha, K. Karthik Reddy, M. Anitha, M. S. Hephzibah</p>
+</footer>
+</body>
+</html>

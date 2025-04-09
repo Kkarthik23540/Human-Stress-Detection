@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic Page Needs -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Human Stress Detection - Prediction</title>
+
+    <!-- Mobile Specific Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <!-- Fonts & Stylesheets -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700" rel="stylesheet">
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/css/prediction.css" rel="stylesheet">
+
+</head>
+<body>
+
+<!-- Header -->
+<header class="project-header">
+    <div class="container text-center">
+        <h1 class="project-title">
+            Human Stress Detection Based on Sleeping Habits Using Machine Learning Algorithms
+        </h1>
+    </div>
+</header>
+    
+<!-- Main Content -->
+<main id="main" class="site-main">
+    <section class="site-section section-ui-elements">
+        <div class="container">
+            <div class="content-wrapper">
+                <div class="form-wrapper">
+                    <h2 style="text-align: center;">Enter Sleep Details</h2>
+                    <form action="{{ url_for('predict') }}" method="POST" class="form-container">
+
+                        <!-- Model selection -->
+                        <label><b>Select Machine Learning Model:</b></label>
+                        <select name="model" required class="form-control">
+                            <option value="" disabled selected>Select a model</option>
+                            <option value="random_committee">Random Committee</option>
+                            <option value="hoeffding_tree">Hoeffding Tree</option>
+                            <option value="logit_boost">Logit Boost</option>
+                            <option value="rep_tree">Rep Tree</option>
+                            <option value="bagging">Bagging</option>
+                            <option value="lwl">Lwl</option>
+                            <!--<option value="one_r">One R</option> -->
+                        </select>                    
+                        <br>
+
+                        <!-- Input fields -->
+                        <label><b>Snoring Range:</b></label>
+                        <input type="text" name="Snoring_Range" placeholder="Snoring Range [45.0 - 100.0]" required class="form-control"/>
+
+                        <label><b>Respiration Rate:</b></label>
+                        <input type="text" name="Respiration_Rate" placeholder="Respiration Rate [16.0 - 30.0]" required class="form-control"/>
+
+                        <label><b>Body Temperature:</b></label>
+                        <input type="text" name="Body_Temperature" placeholder="Body Temperature [85.0 - 99.0]" required class="form-control"/>
+
+                        <label><b>Limb Movement Rate:</b></label>
+                        <input type="text" name="Limb_Movement_Rate" placeholder="Limb Movement Rate [4.0 - 19.0]" required class="form-control"/>
+
+                        <label><b>Blood Oxygen Levels:</b></label>
+                        <input type="text" name="Blood_Oxygen_Levels" placeholder="Blood Oxygen Levels [82.0 - 97.0]" required class="form-control"/>
+
+                        <label><b>Eye Movement:</b></label>
+                        <input type="text" name="Eye_Movement" placeholder="Eye Movement [60.0 - 105.0]" required class="form-control"/>
+
+                        <label><b>Number of Hours of Sleep:</b></label>
+                        <input type="text" name="Number_Of_Hours_Of_Sleep" placeholder="Number of Hours of Sleep [0.0 - 9.0]" required class="form-control"/>
+
+                        <label><b>Heart Rate:</b></label>
+                        <input type="text" name="Heart_Rate" placeholder="Heart Rate [50.0 - 85.0]" required class="form-control"/>
+
+                        <!--  predict Button -->
+                        <button type="submit" class="btn-predict">Predict</button>
+                    </form>
+                </div>
+
+                <!-- Prediction Result -->
+                <div class="result-wrapper">
+                    <h2>Prediction Result</h2>
+                    <div class="result-box">
+                        <h3 class="result-text">Stress Level is: <span class="text-danger">{{ prediction_text }}</span></h3>
+                        <h3 class="precaution-text">Precaution: <span class="text-info">{{ precaution_text }}</span></h3>
+                        <div class="meter-container text-center">
+                            <h3>Stress Level Meter</h3>
+                            <div id="gauge-meter"></div>
+                        </div>
+
+                        <!-- History button -->
+                        <div id="history-button" style="margin-top: 20px;">
+                            <a href="/history" class="btn-history">View Prediction History</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</main>
+
+   <!-- Footer -->
+   <footer class="text-center py-3 bg-light">
+    <p>Human Stress Detection Based on Sleeping Habits Using Machine Learning Algorithms</p>
+    <p>&copy; 2025</p>
+    <p>Group Members: B. Ankitha, K. Karthik Reddy, M. Anitha, M. S. Hephzibah</p>
+</footer>
+
+<!-- JavaScript -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="../static/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.3.0/raphael.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/justgage@1.3.2/justgage.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var gauge = new JustGage({
+            id: "gauge-meter",
+            value: 0,
+            min: 0,
+            max: 4,
+            title: "Stress Level",
+            label: "Level",
+            levelColors: ["#00ff00", "#ffff00", "#ffa500", "#ff4500", "#ff0000"]
+        });
+
+        let levelMap = {
+            "Low/Normal": 0,
+            "Medium Low": 1,
+            "Medium": 2,
+            "Medium High": 3,
+            "High": 4
+        };
+
+        let predictionText = "{{ prediction_text }}".trim();
+
+        if (predictionText in levelMap) {
+            gauge.refresh(levelMap[predictionText]);
+            document.getElementById("history-button").style.display = "block";
+        }
+    });
+</script>
+</body>
+</html>
