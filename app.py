@@ -1,8 +1,11 @@
-#importing necessary libraries
+# importing necessary libraries
 import os
 import time
 import sys
 import socket
+import csv
+import json
+from datetime import datetime
 from flask import Flask, request, render_template, redirect, url_for, flash
 import weka.core.jvm as jvm
 from weka.classifiers import Classifier, Evaluation
@@ -10,10 +13,7 @@ from weka.core.converters import Loader
 import weka.core.serialization as serialization
 from weka.core.dataset import Instance
 from weka.core.classes import Random
-import csv
-import json
-from datetime import datetime
-import math
+
 # Initializing Flask App
 app = Flask(__name__)
 
@@ -28,7 +28,7 @@ for i in range(1, 101):
     sys.stdout.flush()
 print("\nServer is ready to use! \n")
 
-# Start JVM
+# Starting JVM
 jvm.start()
 
 # Loading Dataset
@@ -171,7 +171,6 @@ def clear_history():
     
     return redirect(url_for('history'))
     
-
 # Running App
 if __name__ == "__main__":   # Start the Flask app
     try:
